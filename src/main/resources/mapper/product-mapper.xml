@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.ProductDAO">
+    <insert id="saveProduct" parameterType="com.example.dao.ProductDAO">
+        INSERT INTO product (price, title, image, summary, detail)
+        VALUES (#{price}, #{title}, #{image}, #{summary}, #{detail})
+    </insert>
+    <update id="updateProduct" parameterType="com.example.dao.ProductDAO">
+        UPDATE product
+        SET price = #{price}, title = #{title}, image = #{image}, summary = #{summary}, detail = #{detail}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteProduct">
+        DELETE *
+        FROM product
+        WHERE id = #{pid}
+    </delete>
+
+
+    <sql id="queryFromProduct">
+        SELECT
+            id AS pid,
+            title,
+            image,
+            price,
+            summary,
+            detail
+        FROM product
+    </sql>
+
+    <select id="listProduct" resultType="com.example.model.ProductDO">
+        <include refid="queryFromProduct"/>
+    </select>
+
+
+    <select id="getProduct" parameterType="integer" resultType="com.example.model.ProductDO">
+        <include refid="queryFromProduct"/>
+        Where id=#{pid}
+    </select>
+    <select id="listBuy" resultType="com.example.model.ProductDO">
+
+    </select>
+    <select id="countProductById" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM product
+        WHERE #{pid}
+    </select>
+    <select id="countAllProduct" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM product
+    </select>
+    <select id="getLastProduct" resultType="com.example.model.ProductDO">
+        <include refid="queryFromProduct"/>
+        ORDER BY id DESC LIMIT 0,1
+    </select>
+
+
+</mapper>
