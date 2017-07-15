@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.dao.TransactionDAO">
+    <insert id="saveTransaction" parameterType="com.example.model.TransactionDO">
+        INSERT transaction (product_id, user_id, price)
+        VALUES (#{productId},#{userId},#{price})
+    </insert>
     <select id="getTransactionByUid" parameterType="integer" resultType="com.example.model.TransactionDO">
         SELECT
             id AS tid,

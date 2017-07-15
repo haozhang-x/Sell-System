@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.dao.ProductDAO;
+import com.example.dto.ProductDTO;
 import com.example.model.ProductDO;
 import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class ProductServiceImpl implements ProductService {
         Integer pid = productDO.getPid();
         productDAO.updateProduct(productDO);
         return productDAO.getProduct(pid);
+    }
+
+    public void deleteProduct(Integer pid) {
+        productDAO.deleteProduct(pid);
     }
 }

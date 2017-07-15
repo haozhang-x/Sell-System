@@ -1,12 +1,15 @@
 package com.example.dto;
 
 import com.example.model.ProductDO;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.sql.Date;
 
 /**
  * Created by zhang on 2017/7/8.
  */
-
-public class ProductDTO extends ProductDO{
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductDTO extends ProductDO {
     private Integer pid; //产品id
     private String title; //标题
     private String image;//图片
@@ -16,9 +19,9 @@ public class ProductDTO extends ProductDO{
     private String summary;//摘要
     private String detail;//全文
     private Integer buyPrice;//购买时的价格
-    private Integer buyNum;//购买时间13位时间戳
+    private Integer buyNum;//购买数量
+    private Date buyTime;//购买时间13位时间戳
     private Integer sellNum;//销售数量
-    private Integer total;//购买的总金额
 
     public Integer getPid() {
         return pid;
@@ -108,13 +111,15 @@ public class ProductDTO extends ProductDO{
         this.sellNum = sellNum;
     }
 
-    public Integer getTotal() {
-        return total;
+
+    public Date getBuyTime() {
+        return buyTime;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setBuyTime(Date buyTime) {
+        this.buyTime = buyTime;
     }
+
 
     @Override
     public String toString() {
@@ -130,7 +135,6 @@ public class ProductDTO extends ProductDO{
                 ", buyPrice=" + buyPrice +
                 ", buyNum=" + buyNum +
                 ", sellNum=" + sellNum +
-                ", total=" + total +
                 '}';
     }
 }

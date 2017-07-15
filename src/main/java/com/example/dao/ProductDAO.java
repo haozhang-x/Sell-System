@@ -51,10 +51,9 @@ public interface ProductDAO {
      * 更新商品
      *
      * @param productDO productDO
-     * @return ProductDTO
      */
 
-    Void updateProduct(ProductDO productDO);
+    void updateProduct(ProductDO productDO);
 
     /**
      * 计算id购买的商品数量
@@ -72,7 +71,7 @@ public interface ProductDAO {
      * @param pid product id
      */
 
-    Void deleteProduct(Integer pid);
+    void deleteProduct(Integer pid);
 
 
     //计算所有的商品数量
@@ -84,4 +83,11 @@ public interface ProductDAO {
      */
     ProductDO getLastProduct();
 
+
+    /**
+     * 得到商品的价格，通过id
+     */
+
+
+    Integer getPriceById(Integer pid);
 }

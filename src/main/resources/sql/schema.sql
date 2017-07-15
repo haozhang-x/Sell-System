@@ -1,32 +1,62 @@
 # 数据库表结构：
 # 用户表
-create table userDO(
-  id int auto_increment primary key comment '主键',
-  userName varchar(100) comment '用户名',
-  password varchar(100) comment '密码md5加密',
-  nickName varchar(50) comment '用户昵称',
-  userType tinyint(3) comment '类型，买家0，卖家1')
-  ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+CREATE TABLE user
+(
+  id        INT AUTO_INCREMENT
+  COMMENT '主键'
+    PRIMARY KEY,
+  user_name VARCHAR(100)         NULL
+  COMMENT '用户名',
+  pass_word VARCHAR(100)         NULL
+  COMMENT '密码md5加密',
+  nick_name VARCHAR(50)          NULL
+  COMMENT '用户昵称',
+  user_type SMALLINT(1) UNSIGNED NULL
+  COMMENT '类型，买家0，卖家1'
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-# 内容表
-create table content(
-  id int auto_increment primary key comment '主键',
-  price bigint  comment '当前价格',
-  title varchar(100) comment '标题',
-  icon blob comment '图片',
-  abstract varchar(200) comment '摘要',
-  text blob comment '正文'  )
-  ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+# 产品表
+CREATE TABLE product
+(
+  id      INT AUTO_INCREMENT
+  COMMENT '主键'
+    PRIMARY KEY,
+  price   BIGINT        NULL
+  COMMENT '当前价格',
+  title   VARCHAR(100)  NULL
+  COMMENT '标题',
+  image   VARCHAR(500)  NULL
+  COMMENT '图片',
+  summary VARCHAR(200)  NULL
+  COMMENT '摘要',
+  detail  VARCHAR(1000) NULL
+  COMMENT '正文'
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 # 交易记录表
-create table trx(
-  id int auto_increment primary key comment '主键',
-  contentId int  comment '内容ID',
-  personId int comment '用户ID',
-  price int comment '购买价格',
-  time bigint comment '购买时间')
-  ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+CREATE TABLE transaction
+(
+  id         INT AUTO_INCREMENT
+  COMMENT '主键'
+    PRIMARY KEY,
+  product_id INT                                 NULL
+  COMMENT '内容ID',
+  user_id    INT                                 NULL
+  COMMENT '用户ID',
+  price      INT                                 NULL
+  COMMENT '购买价格',
+  time       TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+  COMMENT '购买时间'
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 # 用户数据：
-insert into `userDO` (`id`, user_name, pass_word, nick_name, user_type) values('0','buyer','37254660e226ea65ce6f1efd54233424','buyer','0');
-insert into `userDO` (`id`, user_name, pass_word, nick_name, user_type) values('1','seller','981c57a5cfb0f868e064904b8745766f','seller','1');
+INSERT INTO `user` (`id`, user_name, pass_word, nick_name, user_type)
+VALUES ('0', 'buyer', '37254660e226ea65ce6f1efd54233424', 'buyer', '0');
+INSERT INTO `user` ( user_name, pass_word, nick_name, user_type)
+VALUES ('seller', '981c57a5cfb0f868e064904b8745766f', 'seller', '1');

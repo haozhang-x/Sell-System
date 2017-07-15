@@ -8,10 +8,10 @@
     <update id="updateProduct" parameterType="com.example.dao.ProductDAO">
         UPDATE product
         SET price = #{price}, title = #{title}, image = #{image}, summary = #{summary}, detail = #{detail}
-        WHERE id = #{id}
+        WHERE id = #{pid}
     </update>
     <delete id="deleteProduct">
-        DELETE *
+        DELETE
         FROM product
         WHERE id = #{pid}
     </delete>
@@ -52,6 +52,13 @@
     <select id="getLastProduct" resultType="com.example.model.ProductDO">
         <include refid="queryFromProduct"/>
         ORDER BY id DESC LIMIT 0,1
+    </select>
+
+
+    <select id="getPriceById" parameterType="integer" resultType="integer">
+        SELECT price
+        FROM product
+        WHERE id = #{pid}
     </select>
 
 

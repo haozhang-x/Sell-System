@@ -4,7 +4,6 @@
 <body>
 <#include "./include/support.ftl">
 <#include "./include/header.ftl">
-<#assign listType = 0>
 <div class="g-doc">
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <div class="tab">
@@ -28,7 +27,7 @@
             <#if user??>
                 <#if user.userType == 0 && listType == 1>
                     <#list productList as x>
-                        <#if x.isBuy==1>
+                        <#if x.isBuy==0>
                             <li id="p-${x.pid}">
                                 <a href="/show?pid=${x.pid}" class="link">
                                     <div class="img"><img src="${x.image}" alt="${x.title}"></div>

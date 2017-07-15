@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by zhang on 2017/6/30.
@@ -40,36 +41,30 @@ public class ShowController {
             UserDO user = (UserDO) httpSession.getAttribute("user");
             Integer userType = user.getUserType();
             Integer uid = user.getUid();
-
-            TransactionDO transaction = transactionService.getTransactionByUId(uid);
-            Integer productId = -1;
+            Integer isBuy = 0;
             Integer buyPrice = 0;
-            if (transaction != null) {
+            Integer isSell = 0;
+            List<TransactionDO> transactions = transactionService.getTransactionByUId(uid);
+            for (TransactionDO transaction : transactions) {
+                Integer productId = -1;
                 productId = transaction.getProductId();
-                buyPrice = transaction.getPrice();
-            }
-
-            if (userType == 0) {
-                Integer isBuy = 0;
-
-                if (productId.equals(pid)) {
-                    isBuy = 1;
-                    productDTO.setBuyPrice(buyPrice);
+                if (userType == 0) {
+                    if (productId.equals(pid)) {
+                        isBuy = 1;
+                        buyPrice = transaction.getPrice();
+                    }
+                } else {
+                    if (productId.equals(pid)) {
+                        isSell = 1;
+                    }
                 }
-                productDTO.setIsBuy(isBuy);
-            } else {
-                Integer isSell = 0;
-                if (productId.equals(pid)) {
-                    isSell = 1;
-                }
-                productDTO.setIsBuy(isSell);
             }
-
-            System.out.println(productDTO.toString());
+            productDTO.setIsBuy(isBuy);
+            productDTO.setIsSell(isSell);
+            productDTO.setBuyPrice(buyPrice);
         }
         ProductDO product = productService.getProductById(pid);
         BeanUtils.copyProperties(product, productDTO);
-        System.out.println("2:" + productDTO.toString());
         modelMap.addAttribute("product", productDTO);
         return new ModelAndView("show", modelMap);
     }

@@ -20,10 +20,12 @@ import static org.junit.Assert.*;
 public class ProductServiceTest {
     @Autowired
     ProductService productService;
+    @Autowired
+    TransactionService transactionService;
 
     @Test
     public void listProduct() throws Exception {
-        List<ProductDO> productDTOS = productService.listProduct();
+        transactionService.saveTransaction(5,2,3);
     }
 
 }

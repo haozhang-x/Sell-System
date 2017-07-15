@@ -16,4 +16,6 @@ public interface ProductService {
 
     ProductDO updateProduct(ProductDO productDO);
 
+    void deleteProduct(Integer pid);
+
 }

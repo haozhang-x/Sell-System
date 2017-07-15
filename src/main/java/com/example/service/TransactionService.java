@@ -2,11 +2,15 @@ package com.example.service;
 
 import com.example.model.TransactionDO;
 
+import java.util.List;
+
 /**
  * Created by zhang on 2017/7/13.
  */
 public interface TransactionService {
-    TransactionDO getTransactionByUId(Integer uid);
+    List<TransactionDO> getTransactionByUId(Integer uid);
 
-    TransactionDO getTransactionByPId(Integer pid);
+    List<TransactionDO> getTransactionByPId(Integer pid);
+
+    void saveTransaction(Integer pid,Integer number,Integer userId);
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import sun.java2d.pisces.PiscesRenderingEngine;
 
 import javax.servlet.http.HttpSession;
@@ -38,46 +39,57 @@ public class IndexController {
     }
 
     @RequestMapping(path = {"/", "/index"})
-    public String index(ModelMap modelMap, HttpSession httpSession) {
-        List<ProductDO> productDOS = productService.listProduct();
+    public String index(Integer type, ModelMap modelMap, HttpSession httpSession) {
+        modelMap.addAttribute("listType", 0);
+        if (type != null) {
+            System.out.println(type);
+            if (type.equals(1)) {
+                modelMap.addAttribute("listType", 1);
+            }
+        }
+
+
+        List<ProductDO> products = productService.listProduct();
         List<ProductDTO> productDTOS = new ArrayList<ProductDTO>();
 
-        for (ProductDO product : productDOS) {
+        for (ProductDO product : products) {
+
             ProductDTO p = new ProductDTO();
             BeanUtils.copyProperties(product, p);
+
             if (httpSession.getAttribute("user") != null) {
                 UserDO user = (UserDO) httpSession.getAttribute("user");
                 Integer userType = user.getUserType();
                 Integer uid = user.getUid();
-                TransactionDO transaction = transactionService.getTransactionByUId(uid);
+
+                Integer isBuy = 0;
+                Integer isSell = 0;
                 Integer productId = -1;
-                if (transaction != null) {
-                    productId = transaction.getProductId();
-                }
                 if (userType == 0) {
-                    Integer isBuy = 0;
-                    if (productId.equals(product.getPid())) {
-                        isBuy = 1;
+                    List<TransactionDO> transactions = transactionService.getTransactionByUId(uid);
+                    for (TransactionDO transaction : transactions) {
+                        productId = transaction.getProductId();
+                        if (productId.equals(product.getPid())) {
+                            isBuy = 1;
+                        }
                     }
-                    p.setIsBuy(isBuy);
                 }
                 if (userType == 1) {
-                    transaction = transactionService.getTransactionByPId(product.getPid());
-                    if (transaction!=null){
-                        productId = transaction.getProductId();
+                    List<TransactionDO> transactions = transactionService.getTransactionByPId(product.getPid());
+                    for (TransactionDO transaction : transactions) {
+                        if (transaction != null) {
+                            productId = transaction.getProductId();
+                        }
+                        if (productId.equals(product.getPid())) {
+                            isSell = 1;
+                        }
                     }
-                    Integer isSell = 0;
-                    if (productId.equals(product.getPid())) {
-                        isSell = 1;
-                    }
-                    p.setIsSell(isSell);
                 }
-
-
+                p.setIsBuy(isBuy);
+                p.setIsSell(isSell);
+                System.out.println(p.toString());
             }
-
             productDTOS.add(p);
-            System.out.println("p:" + p.toString());
         }
         modelMap.addAttribute("productList", productDTOS);
         modelMap.addAttribute("title", "主页");

@@ -39,5 +39,13 @@
         </property>
     </bean>
 
+    <!--multipartResolver配置-->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="209715200"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+
 
 </beans>

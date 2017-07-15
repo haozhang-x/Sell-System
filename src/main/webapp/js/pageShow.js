@@ -7,11 +7,11 @@
 		e = window.event || e;
 		o = e.srcElement || e.target;
 		var num = $('allNum').textContent;
-		if(num > 0){
+		if(num >0){
 			num --;
 			$('allNum').innerHTML = num;
 		}else{
-			alert("您没有购买任何商品");
+            alert("您没有购买任何商品");
 		}
 	};
 

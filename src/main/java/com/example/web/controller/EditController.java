@@ -25,14 +25,15 @@ public class EditController {
     @RequestMapping("/edit")
     public ModelAndView edit(@RequestParam("pid") Integer pid, ModelMap modelMap) {
         ProductDO product = productService.getProductById(pid);
-        System.out.println(product.toString());
         modelMap.addAttribute("product", product);
         return new ModelAndView("edit", modelMap);
     }
 
     @RequestMapping("/editSubmit")
-    public ModelAndView editSubmit(ProductDO productDO, ModelMap modelMap) {
-        ProductDO productDO1 = productService.updateProduct(productDO);
-        return new ModelAndView("editSubmit", modelMap.addAttribute("product", productDO1));
+    public ModelAndView editSubmit(@RequestParam("pid") Integer pid, ProductDO productDO, ModelMap modelMap) {
+        productService.updateProduct(productDO);
+        ProductDO product = productService.getProductById(pid);
+        return new ModelAndView("editSubmit",
+                modelMap.addAttribute("product", product));
     }
 }
