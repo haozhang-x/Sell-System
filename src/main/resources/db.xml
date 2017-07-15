@@ -4,5 +4,5 @@
     <entry key="driverClassName">com.mysql.cj.jdbc.Driver</entry>
     <entry key="url">jdbc:mysql://localhost:3306/sellsystem?useUnicode=true&amp;characterEncoding=utf8</entry>
     <entry key="username">root</entry>
-    <entry key="password">123</entry>
+    <entry key="password">toor</entry>
 </properties>
