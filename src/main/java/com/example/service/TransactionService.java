@@ -10,6 +10,8 @@ import java.util.List;
 public interface TransactionService {
     List<TransactionDO> getTransactionByUId(Integer uid);
 
+    Integer countTransactionByPId(Integer pid);
+
     List<TransactionDO> getTransactionByPId(Integer pid);
 
     void saveTransaction(Integer pid,Integer number,Integer userId);

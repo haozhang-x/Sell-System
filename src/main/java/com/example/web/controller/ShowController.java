@@ -42,7 +42,7 @@ public class ShowController {
             Integer userType = user.getUserType();
             Integer uid = user.getUid();
             Integer isBuy = 0;
-            Integer buyPrice = 0;
+            Float buyPrice = 0f;
             Integer isSell = 0;
             List<TransactionDO> transactions = transactionService.getTransactionByUId(uid);
             for (TransactionDO transaction : transactions) {

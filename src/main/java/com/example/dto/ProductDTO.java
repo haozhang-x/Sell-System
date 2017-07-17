@@ -1,26 +1,25 @@
 package com.example.dto;
 
-import com.example.model.ProductDO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by zhang on 2017/7/8.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductDTO extends ProductDO {
+public class ProductDTO {
     private Integer pid; //产品id
     private String title; //标题
     private String image;//图片
-    private Long price;//价格
+    private Float price;//价格
     private Integer isBuy;//当前用户是否已经购买
     private Integer isSell;//是否已经卖出
     private String summary;//摘要
     private String detail;//全文
-    private Integer buyPrice;//购买时的价格
+    private Float buyPrice;//购买时的价格
     private Integer buyNum;//购买数量
-    private Date buyTime;//购买时间13位时间戳
+    private Timestamp buyTime;//购买时间13位时间戳
     private Integer sellNum;//销售数量
 
     public Integer getPid() {
@@ -47,11 +46,11 @@ public class ProductDTO extends ProductDO {
         this.image = image;
     }
 
-    public Long getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -87,13 +86,16 @@ public class ProductDTO extends ProductDO {
         this.detail = detail;
     }
 
-    public Integer getBuyPrice() {
+    public Float getBuyPrice() {
         return buyPrice;
     }
 
-    public void setBuyPrice(Integer buyPrice) {
+    public void setBuyPrice(Float buyPrice) {
         this.buyPrice = buyPrice;
     }
+
+
+
 
     public Integer getBuyNum() {
         return buyNum;
@@ -111,15 +113,13 @@ public class ProductDTO extends ProductDO {
         this.sellNum = sellNum;
     }
 
-
-    public Date getBuyTime() {
+    public Timestamp getBuyTime() {
         return buyTime;
     }
 
-    public void setBuyTime(Date buyTime) {
+    public void setBuyTime(Timestamp buyTime) {
         this.buyTime = buyTime;
     }
-
 
     @Override
     public String toString() {

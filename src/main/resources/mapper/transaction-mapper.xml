@@ -3,17 +3,16 @@
 <mapper namespace="com.example.dao.TransactionDAO">
     <insert id="saveTransaction" parameterType="com.example.model.TransactionDO">
         INSERT transaction (product_id, user_id, price)
-        VALUES (#{productId},#{userId},#{price})
+        VALUES (#{productId}, #{userId}, #{price})
     </insert>
     <select id="getTransactionByUid" parameterType="integer" resultType="com.example.model.TransactionDO">
-        SELECT
-            id AS tid,
+        SELECT DISTINCT product_id,
             product_id,
             user_id,
             price,
             time
         FROM transaction
-        WHERE user_id = #{uid};
+        WHERE user_id = #{uid}
     </select>
     <select id="getTransactionByPId" resultType="com.example.model.TransactionDO">
         SELECT
@@ -23,6 +22,10 @@
             price,
             time
         FROM transaction
-        WHERE product_id = #{pid};
+    </select>
+    <select id="countTransactionByPId" resultType="java.lang.Integer" parameterType="integer">
+        SELECT count(id)
+        FROM transaction
+        WHERE product_id = #{pid}
     </select>
 </mapper>

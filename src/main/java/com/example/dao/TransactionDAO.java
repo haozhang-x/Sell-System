@@ -10,6 +10,9 @@ import java.util.List;
 public interface TransactionDAO {
     List<TransactionDO> getTransactionByUid(Integer uid);
 
+
+    Integer countTransactionByPId(Integer pid);
+
     List<TransactionDO> getTransactionByPId(Integer pid);
 
     void saveTransaction(TransactionDO transactionDO);

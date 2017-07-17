@@ -89,5 +89,5 @@ public interface ProductDAO {
      */
 
 
-    Integer getPriceById(Integer pid);
+    Float getPriceById(Integer pid);
 }

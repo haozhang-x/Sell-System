@@ -26,10 +26,12 @@
             summary,
             detail
         FROM product
+
     </sql>
 
     <select id="listProduct" resultType="com.example.model.ProductDO">
         <include refid="queryFromProduct"/>
+        order by id DESC
     </select>
 
 
@@ -55,7 +57,7 @@
     </select>
 
 
-    <select id="getPriceById" parameterType="integer" resultType="integer">
+    <select id="getPriceById" parameterType="integer" resultType="java.lang.Float">
         SELECT price
         FROM product
         WHERE id = #{pid}

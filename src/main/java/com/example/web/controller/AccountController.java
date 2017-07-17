@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +44,15 @@ public class AccountController {
             if (transactions != null) {
                 for (TransactionDO transaction : transactions) {
                     ProductDTO productDTO = new ProductDTO();
-                    Integer price = transaction.getPrice();
-                    Date time = transaction.getTime();
+                    Float price = transaction.getPrice();
+                    Timestamp time = transaction.getTime();
                     Integer productId = transaction.getProductId();
                     ProductDO product = productService.getProductById(productId);
                     BeanUtils.copyProperties(product, productDTO);
                     productDTO.setBuyPrice(price);
                     productDTO.setBuyTime(time);
+                    productDTO.setBuyNum(transactionService.countTransactionByPId(productId));
+                    System.out.println(time);
                     productDTOs.add(productDTO);
                 }
 

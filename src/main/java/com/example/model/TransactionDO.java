@@ -1,24 +1,15 @@
 package com.example.model;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class TransactionDO {
 
-    private Integer tid;
     private Integer productId;
     private Integer userId;
-    private Integer price;
-    private Date time;
+    private Float price;
+    private Timestamp time;
 
-
-    public Integer getPid() {
-        return tid;
-    }
-
-    public void setPid(Integer tid) {
-        this.tid = tid;
-    }
 
     public Integer getProductId() {
         return productId;
@@ -36,26 +27,25 @@ public class TransactionDO {
         this.userId = userId;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
     @Override
     public String toString() {
         return "TransactionDO{" +
-                "tid=" + tid +
                 ", productId=" + productId +
                 ", userId=" + userId +
                 ", price=" + price +

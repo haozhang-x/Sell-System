@@ -30,6 +30,10 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionDAO.getTransactionByUid(uid);
     }
 
+    public Integer countTransactionByPId(Integer pid) {
+        return transactionDAO.countTransactionByPId(pid);
+    }
+
     public List<TransactionDO> getTransactionByPId(Integer pid) {
         return transactionDAO.getTransactionByPId(pid);
     }
@@ -37,7 +41,7 @@ public class TransactionServiceImpl implements TransactionService {
     public void saveTransaction(Integer pid, Integer number, Integer userId) {
         for (int i = 0; i < number; i++) {
             TransactionDO transaction = new TransactionDO();
-            Integer price = productDAO.getPriceById(pid);
+            Float price = productDAO.getPriceById(pid);
             transaction.setProductId(pid);
             transaction.setPrice(price);
             transaction.setUserId(userId);

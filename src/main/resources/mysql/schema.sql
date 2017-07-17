@@ -23,7 +23,7 @@ CREATE TABLE product
   id      INT AUTO_INCREMENT
   COMMENT '主键'
     PRIMARY KEY,
-  price   BIGINT        NULL
+  price   FLOAT(7, 2)   NULL
   COMMENT '当前价格',
   title   VARCHAR(100)  NULL
   COMMENT '标题',
@@ -47,7 +47,7 @@ CREATE TABLE transaction
   COMMENT '内容ID',
   user_id    INT                                 NULL
   COMMENT '用户ID',
-  price      INT                                 NULL
+  price      FLOAT(7, 2)                         NULL
   COMMENT '购买价格',
   time       TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
   COMMENT '购买时间'
@@ -58,5 +58,5 @@ CREATE TABLE transaction
 # 用户数据：
 INSERT INTO `user` (`id`, user_name, pass_word, nick_name, user_type)
 VALUES ('0', 'buyer', '37254660e226ea65ce6f1efd54233424', 'buyer', '0');
-INSERT INTO `user` ( user_name, pass_word, nick_name, user_type)
+INSERT INTO `user` (user_name, pass_word, nick_name, user_type)
 VALUES ('seller', '981c57a5cfb0f868e064904b8745766f', 'seller', '1');

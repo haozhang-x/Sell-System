@@ -25,7 +25,7 @@
             <tr>
                 <td><a href="/show?pid=${x.pid}"><img src="${x.image}" alt=""></a></td>
                 <td><h4><a href="/show?pid=${x.pid}">${x.title}</a></h4></td>
-                <td><span class="v-time">${x.buyTime?string("yyyy-MM-dd HH:mm")}</span></td>
+                <td><span class="v-time">${x.buyTime?string("yyyy-MM-dd kk:mm:ss")}</span></td>
                 <td><span class="v-num">${x.buyNum!1}</span></td>
                 <td><span class="v-unit">¥</span><span class="value">${x.buyPrice}</span></td>
             </tr>

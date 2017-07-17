@@ -5,7 +5,7 @@ package com.example.model;
  */
 public class ProductDO {
     private Integer pid;
-    private Long price;
+    private Float price;
     private String title;
     private String image;
     private String summary;
@@ -19,11 +19,11 @@ public class ProductDO {
         this.pid = pid;
     }
 
-    public Long getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
