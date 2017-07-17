@@ -44,8 +44,6 @@ public class BuyProductApiController {
                 System.out.println(jsonObject.toString());
                 transactionService.saveTransaction(Integer.valueOf(id), Integer.valueOf(number), userId);
             }
-
-
             modelMap.addAttribute("code", 200);
             modelMap.addAttribute("message", "success");
             modelMap.addAttribute("result", true);

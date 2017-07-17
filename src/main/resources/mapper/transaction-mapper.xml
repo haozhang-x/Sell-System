@@ -6,7 +6,8 @@
         VALUES (#{productId}, #{userId}, #{price})
     </insert>
     <select id="getTransactionByUid" parameterType="integer" resultType="com.example.model.TransactionDO">
-        SELECT DISTINCT product_id,
+        SELECT DISTINCT
+            product_id,
             product_id,
             user_id,
             price,
@@ -14,7 +15,7 @@
         FROM transaction
         WHERE user_id = #{uid}
     </select>
-    <select id="getTransactionByPId" resultType="com.example.model.TransactionDO">
+    <select id="getTransactionByPId" resultType="com.example.model.TransactionDO" parameterType="integer">
         SELECT
             id AS tid,
             product_id,
@@ -22,6 +23,7 @@
             price,
             time
         FROM transaction
+        WHERE product_id = #{pid}
     </select>
     <select id="countTransactionByPId" resultType="java.lang.Integer" parameterType="integer">
         SELECT count(id)
