@@ -57,5 +57,10 @@
             <bean class="com.example.interceptor.ApiInterceptor"/>
         </mcv:interceptor>
 
+        <mcv:interceptor>
+            <mcv:mapping path="/"/>
+            <bean class="com.example.interceptor.CommonsInterceptor"/>
+        </mcv:interceptor>
+
     </mvc:interceptors>
 </beans>
