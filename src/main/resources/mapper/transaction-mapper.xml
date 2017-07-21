@@ -7,13 +7,13 @@
     </insert>
     <select id="getTransactionByUid" parameterType="integer" resultType="com.example.model.TransactionDO">
         SELECT DISTINCT
-            product_id,
+            time,
             product_id,
             user_id,
-            price,
-            time
+            price
         FROM transaction
         WHERE user_id = #{uid}
+        ORDER BY time DESC
     </select>
     <select id="getTransactionByPId" resultType="com.example.model.TransactionDO" parameterType="integer">
         SELECT
@@ -30,4 +30,11 @@
         FROM transaction
         WHERE product_id = #{pid}
     </select>
+    <select id="countTransactionByTime" resultType="java.lang.Integer" parameterType="date">
+        SELECT count(id)
+        FROM transaction
+        WHERE time = #{time}
+    </select>
+
+
 </mapper>

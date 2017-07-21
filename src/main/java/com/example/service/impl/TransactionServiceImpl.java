@@ -3,11 +3,11 @@ package com.example.service.impl;
 import com.example.dao.ProductDAO;
 import com.example.dao.TransactionDAO;
 import com.example.model.TransactionDO;
-import com.example.service.ProductService;
 import com.example.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -32,6 +32,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     public Integer countTransactionByPId(Integer pid) {
         return transactionDAO.countTransactionByPId(pid);
+    }
+
+    public Integer countTransactionByTime(Timestamp timestamp) {
+        return transactionDAO.countTransactionByTime(timestamp);
     }
 
     public List<TransactionDO> getTransactionByPId(Integer pid) {

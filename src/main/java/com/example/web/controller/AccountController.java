@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +47,11 @@ public class AccountController {
                     Integer productId = transaction.getProductId();
                     ProductDO product = productService.getProductById(productId);
                     BeanUtils.copyProperties(product, productDTO);
+
                     productDTO.setBuyPrice(price);
                     productDTO.setBuyTime(time);
-                    productDTO.setBuyNum(transactionService.countTransactionByPId(productId));
-                    System.out.println(time);
+                    productDTO.setBuyNum(transactionService.countTransactionByTime(time));
+
                     productDTOs.add(productDTO);
                 }
 
