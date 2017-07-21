@@ -18,9 +18,17 @@ public class CommonsInterceptor implements HandlerInterceptor {
 
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         UserDO user = (UserDO) httpServletRequest.getSession().getAttribute("user");
+        String requestURI = httpServletRequest.getRequestURI();
+
         if (user == null)
             modelAndView.setViewName("login");
-
+        else {
+            if ("/public".equals(requestURI) || "/edit".equals(requestURI)) {
+                if (user.getUserType() != 1) {
+                    modelAndView.setViewName("error");
+                }
+            }
+        }
     }
 
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
