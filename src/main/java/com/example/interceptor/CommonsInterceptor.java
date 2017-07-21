@@ -20,8 +20,12 @@ public class CommonsInterceptor implements HandlerInterceptor {
         UserDO user = (UserDO) httpServletRequest.getSession().getAttribute("user");
         String requestURI = httpServletRequest.getRequestURI();
 
-        if (user == null)
-            modelAndView.setViewName("login");
+        if (user == null) {
+            if (!("/".equals(requestURI) || "/index".equals(requestURI))) {
+                modelAndView.setViewName("login");
+            }
+        }
+
         else {
             if ("/public".equals(requestURI) || "/edit".equals(requestURI)) {
                 if (user.getUserType() != 1) {
