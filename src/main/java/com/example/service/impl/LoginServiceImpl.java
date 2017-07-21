@@ -26,7 +26,8 @@ public class LoginServiceImpl implements LoginService {
             if (userDOInfo.getPassWord().equals(userDO.getPassWord())) {
                 BeanUtils.copyProperties(userDOInfo, userDO);
                 return true;
-            }
+            } else
+                return false;
         }
         return false;
     }

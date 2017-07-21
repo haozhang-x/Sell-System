@@ -34,7 +34,7 @@ public class LoginApiController {
             modelMap.addAttribute("result", true);
             httpSession.setAttribute("user", user);
         } else {
-            modelMap.addAttribute("code", 401);
+            modelMap.addAttribute("code", 400);
             modelMap.addAttribute("message", "failed");
             modelMap.addAttribute("result", false);
         }

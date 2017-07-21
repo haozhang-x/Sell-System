@@ -21,7 +21,7 @@ public class CommonsInterceptor implements HandlerInterceptor {
         String requestURI = httpServletRequest.getRequestURI();
 
         if (user == null) {
-            if (!("/".equals(requestURI) || "/index".equals(requestURI))) {
+            if (!("/".equals(requestURI) || "/index".equals(requestURI) || "/show".equals(requestURI))) {
                 modelAndView.setViewName("login");
             }
         }

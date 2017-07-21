@@ -19,8 +19,8 @@ public class ApiInterceptor implements HandlerInterceptor {
 
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         UserDO user = (UserDO) httpServletRequest.getSession().getAttribute("user");
+        String requestURI = httpServletRequest.getRequestURI();
         if (user != null) {
-            String requestURI = httpServletRequest.getRequestURI();
             Integer userType = user.getUserType();
             if ("/api/delete".equals(requestURI)) {
                 if (userType.equals(0)) {
@@ -28,7 +28,10 @@ public class ApiInterceptor implements HandlerInterceptor {
                 }
             }
         } else {
-            modelAndView.setViewName("login");
+            if (!"/api/login".equals(requestURI)) {
+                modelAndView.setViewName("login");
+            }
+
         }
     }
 
