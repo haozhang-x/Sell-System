@@ -5,7 +5,9 @@ import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -14,6 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PublicController {
     private ProductService productService;
+
+    @ModelAttribute("title")
+    private void setTitle(ModelMap modelMap) {
+        modelMap.addAttribute("title", "发布");
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -25,10 +32,9 @@ public class PublicController {
         return new ModelAndView("public");
     }
 
-    @RequestMapping("/publicSubmit")
-    public ModelAndView publicSubmit(ProductDO product,ModelMap modelMap) {
+    @RequestMapping(value = "/publicSubmit", method = RequestMethod.POST)
+    public ModelAndView publicSubmit(ProductDO product, ModelMap modelMap) {
         ProductDO productDO = productService.saveProduct(product);
-        System.out.println(productDO.toString());
-        return new ModelAndView("publicSubmit",modelMap.addAttribute("product", productDO));
+        return new ModelAndView("publicSubmit", modelMap.addAttribute("product", productDO));
     }
 }

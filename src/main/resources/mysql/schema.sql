@@ -23,15 +23,15 @@ CREATE TABLE product
   id      INT AUTO_INCREMENT
   COMMENT '主键'
     PRIMARY KEY,
-  price   FLOAT(7, 2)   NULL
+  price   FLOAT(7, 2)  NULL
   COMMENT '当前价格',
-  title   VARCHAR(100)  NULL
+  title   VARCHAR(100) NULL
   COMMENT '标题',
-  image   VARCHAR(500)  NULL
+  image   VARCHAR(500) NULL
   COMMENT '图片',
-  summary VARCHAR(200)  NULL
+  summary VARCHAR(200) NULL
   COMMENT '摘要',
-  detail  VARCHAR(1000) NULL
+  detail  BLOB         NULL
   COMMENT '正文'
 )
   ENGINE = InnoDB

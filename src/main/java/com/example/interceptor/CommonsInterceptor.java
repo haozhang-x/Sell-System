@@ -1,5 +1,6 @@
 package com.example.interceptor;
 
+import com.example.model.UserDO;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +17,9 @@ public class CommonsInterceptor implements HandlerInterceptor {
     }
 
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        UserDO user = (UserDO) httpServletRequest.getSession().getAttribute("user");
+        if (user == null)
+            modelAndView.setViewName("login");
 
     }
 

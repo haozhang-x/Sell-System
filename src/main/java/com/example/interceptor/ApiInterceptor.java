@@ -17,8 +17,7 @@ public class ApiInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, final ModelAndView modelAndView) throws Exception {
-        //System.out.println("执行到了postHandle method");
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         UserDO user = (UserDO) httpServletRequest.getSession().getAttribute("user");
         if (user != null) {
             String requestURI = httpServletRequest.getRequestURI();
@@ -28,14 +27,12 @@ public class ApiInterceptor implements HandlerInterceptor {
                     modelAndView.setViewName("error");
                 }
             }
-
-           // System.out.println(user);
         } else {
             modelAndView.setViewName("login");
         }
     }
 
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        //System.out.println("执行到了afterCompletion method");
+
     }
 }

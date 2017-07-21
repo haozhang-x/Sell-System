@@ -44,9 +44,11 @@ public class ShowController {
             Integer isBuy = 0;
             Float buyPrice = 0f;
             Integer isSell = 0;
+            Integer sellNum = transactionService.countTransactionByPId(pid);
             List<TransactionDO> transactions = transactionService.getTransactionByUId(uid);
             for (TransactionDO transaction : transactions) {
                 Integer productId = -1;
+
                 productId = transaction.getProductId();
                 if (userType == 0) {
                     if (productId.equals(pid)) {
@@ -59,6 +61,8 @@ public class ShowController {
                     }
                 }
             }
+            productDTO.setSellNum(sellNum);
+            System.out.println("sellnum" + sellNum);
             productDTO.setIsBuy(isBuy);
             productDTO.setIsSell(isSell);
             productDTO.setBuyPrice(buyPrice);

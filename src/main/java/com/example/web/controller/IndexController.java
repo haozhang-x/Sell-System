@@ -89,7 +89,7 @@ public class IndexController {
             productDTOS.add(p);
         }
         modelMap.addAttribute("productList", productDTOS);
-        modelMap.addAttribute("title", "主页");
+        modelMap.addAttribute("title", "首页");
         return "index";
     }
 }

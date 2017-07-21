@@ -5,11 +5,13 @@
         INSERT INTO product (price, title, image, summary, detail)
         VALUES (#{price}, #{title}, #{image}, #{summary}, #{detail})
     </insert>
+
     <update id="updateProduct" parameterType="com.example.dao.ProductDAO">
         UPDATE product
         SET price = #{price}, title = #{title}, image = #{image}, summary = #{summary}, detail = #{detail}
         WHERE id = #{pid}
     </update>
+
     <delete id="deleteProduct">
         DELETE
         FROM product
@@ -17,9 +19,19 @@
     </delete>
 
 
+    <resultMap id="productMap" type="com.example.model.ProductDO">
+        <result property="pid" column="id"/>
+        <result property="price" column="price"/>
+        <result property="title" column="title"/>
+        <result property="image" column="image"/>
+        <result property="summary" column="summary"/>
+        <result property="detail" column="detail" typeHandler="com.example.typehandler.MyBlobTypeHandler"/>
+    </resultMap>
+
+
     <sql id="queryFromProduct">
         SELECT
-            id AS pid,
+        id,
             title,
             image,
             price,
@@ -29,17 +41,17 @@
 
     </sql>
 
-    <select id="listProduct" resultType="com.example.model.ProductDO">
+    <select id="listProduct" resultMap="productMap">
         <include refid="queryFromProduct"/>
         order by id DESC
     </select>
 
 
-    <select id="getProduct" parameterType="integer" resultType="com.example.model.ProductDO">
+    <select id="getProduct" parameterType="integer" resultMap="productMap">
         <include refid="queryFromProduct"/>
         Where id=#{pid}
     </select>
-    <select id="listBuy" resultType="com.example.model.ProductDO">
+    <select id="listBuy" resultMap="productMap">
 
     </select>
     <select id="countProductById" resultType="java.lang.Integer">
@@ -51,7 +63,7 @@
         SELECT count(*)
         FROM product
     </select>
-    <select id="getLastProduct" resultType="com.example.model.ProductDO">
+    <select id="getLastProduct" resultMap="productMap">
         <include refid="queryFromProduct"/>
         ORDER BY id DESC LIMIT 0,1
     </select>

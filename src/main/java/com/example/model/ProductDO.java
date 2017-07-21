@@ -56,6 +56,7 @@ public class ProductDO {
     }
 
     public void setDetail(String detail) {
+
         this.detail = detail;
     }
 

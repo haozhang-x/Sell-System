@@ -20,15 +20,20 @@
             </div>
 
             <#if user??>
-                <div class="num">购买数量：<span id="plusNum" class="lessNum"><a>-</a></span><span class="totalNum" id="allNum">${product.buyNum!1}</span><span
-                        id="addNum" class="moreNum"><a>+</a></span></div>
+                <#if user.userType==0>
+                    <div class="num">购买数量：<span id="plusNum" class="lessNum"><a>-</a></span><span class="totalNum" id="allNum">${product.buyNum!1}</span><span
+                            id="addNum" class="moreNum"><a>+</a></span></div>
+                </#if>
             </#if>
 
             <div class="oprt f-cb">
                 <#if user??>
                     <#if user.userType==0>
                         <#if product.isBuy==1>
-                            <span class="u-btn u-btn-primary z-dis">已购买</span>
+                            <button class="u-btn u-btn-primary" id="add" data-id="${product.pid}"
+                                    data-title="${product.title}" data-price="${product.price}">
+                                再次购买
+                            </button>
                             <span class="buyprice">当时购买价格：¥${product.buyPrice}</span>
                         <#else>
                             <button class="u-btn u-btn-primary" id="add" data-id="${product.pid}"
@@ -38,6 +43,7 @@
                         </#if>
                     <#else >
                         <a href="/edit?pid=${product.pid}" class="u-btn u-btn-primary">编 辑</a>
+                        <span class="buyprice">已售出：${product.sellNum!0}</span>
                     </#if>
                 </#if>
 
